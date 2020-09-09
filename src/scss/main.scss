@@ -1,17 +1,2 @@
 @import '~normalize.css';
 @import 'vars/vars';
-@import './src/pages/page2';
-
-body {
-    display: flex;
-    background-image: url('../assets/img/image.png');
-    font-family: $regular;
-}
-p {
-    color: black;
-    font-family: $bold;
-}
-img {
-    width: 300px;
-    height: 300px;
-}

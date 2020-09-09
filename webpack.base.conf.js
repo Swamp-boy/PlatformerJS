@@ -19,7 +19,6 @@ module.exports = {
 
   entry: {
     app: ['@babel/polyfill', PATHS.src],
-    dot1: [`${PATHS.src}/dot1Example.js`],
 
   },
   output: {
@@ -195,22 +194,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${PATHS.src}/pages/index/index.pug`,
       filename: 'index.html',
-      excludeChunks: ['dot1'],
-    }),
-    new HtmlWebpackPlugin({
-      template: `${PATHS.src}/pages/page2/page2.pug`,
-      filename: 'page2.html',
-      excludeChunks: ['app'],
-
     }),
 
-    /*    //automatization HtmlWebpackPlugin
-    ...PAGES.map((page) => new HtmlWebpackPlugin({
-      template: `${PAGES_DIR}/${page}`,
-      filename: `./${page.replace(/\.pug/, '.html')}`,
-      excludeChunks: ['app'],
-    })),
-    */
+
     new CopyWebpackPlugin([
       { from: `${PATHS.src}/assets/fonts`, to: `${PATHS.assets}fonts` },
       { from: `${PATHS.src}/assets/img`, to: `${PATHS.assets}img` },
