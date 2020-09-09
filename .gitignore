@@ -1,2 +1,7 @@
 node_modules/
-/src/prettier.config.js
+dist/
+prettier.config.js
+.history
+postcss.config.js
+yarn-error.log
+.eslintrc
