@@ -77,9 +77,6 @@ function enemysQuantity(widthElement) {
   return (document.documentElement.clientWidth / widthElement) / params.alienKoef;
 }
 
-function randomXY() {
-
-}
 function createAlien() {
   const aliensQuntity = Math.round((document.documentElement.clientWidth - 250) / params.alienZone)
 
@@ -87,7 +84,7 @@ function createAlien() {
   for (let i = 0; i <= aliensQuntity; i++) {
     const alien = document.createElement('div');
     alien.classList.add('alien');
-    const alienTop = getRnd(100, document.documentElement.clientHeight - 100); // random y
+    const alienTop = getRnd(250, document.documentElement.clientHeight - 250); // random y
     const alienLeft = getRnd(params.alienZone * (i + 1), params.alienZone * (i + 2)); // create 1 alien in alien zone
 
     alien.style.top = `${alienTop}px`;
@@ -104,11 +101,17 @@ function moveAlien() {
     alien.x -= params.moveSpeed;
     alien.style.left = `${alien.x}px`;
 
+    const birdRound = bird.getBoundingClientRect();
+    const alienRound = alien.getBoundingClientRect();
+
+    if (birdRound.top <= alienRound.bottom // lose conditions
+      && birdRound.right >= alienRound.left
+      && birdRound.left <= alienRound.right
+      && birdRound.bottom >= alienRound.top) { console.log('lose') }
 
     if (alien.x <= document.documentElement.clientLeft) {
       alien.x = document.documentElement.clientWidth + 200;
       const alienTop = getRnd(100, document.documentElement.clientHeight - 100); // random y
-
 
       alien.style.top = `${alienTop}px`;
     }
