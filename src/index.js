@@ -16,12 +16,12 @@ const params = {
   moveSpeed: 3,
   score: 0,
   scoreKoef: 1,
-  alienKoef: 5,
+  alienKoef: 8,
+  alienZone: 350,
 }
 
-const keys = {
-  Space: false,
-
+function getRnd(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function gameOver() {
@@ -42,7 +42,6 @@ function startGame() {
 
   params.start = true;
   createAlien();
-
 
   requestAnimationFrame(playGame);
 }
@@ -78,14 +77,23 @@ function enemysQuantity(widthElement) {
   return (document.documentElement.clientWidth / widthElement) / params.alienKoef;
 }
 
+function randomXY() {
+
+}
 function createAlien() {
-  const alienNum = enemysQuantity(75)
-  for (let i = 0; i <= alienNum; i++) {
+  const aliensQuntity = Math.round((document.documentElement.clientWidth - 250) / params.alienZone)
+
+
+  for (let i = 0; i <= aliensQuntity; i++) {
     const alien = document.createElement('div');
     alien.classList.add('alien');
+    const alienTop = getRnd(100, document.documentElement.clientHeight - 100); // random y
+    const alienLeft = getRnd(params.alienZone * (i + 1), params.alienZone * (i + 2)); // create 1 alien in alien zone
 
-    alien.style.left = `${i * 250}px`;
-    alien.x = i * 250;
+    alien.style.top = `${alienTop}px`;
+    alien.style.left = `${alienLeft}px`;
+
+    alien.x = alienLeft;
     gameArea.appendChild(alien);
   }
 }
@@ -96,8 +104,13 @@ function moveAlien() {
     alien.x -= params.moveSpeed;
     alien.style.left = `${alien.x}px`;
 
+
     if (alien.x <= document.documentElement.clientLeft) {
       alien.x = document.documentElement.clientWidth + 200;
+      const alienTop = getRnd(100, document.documentElement.clientHeight - 100); // random y
+
+
+      alien.style.top = `${alienTop}px`;
     }
   })
 }

@@ -60,13 +60,11 @@
 }
 .alien {
     position: absolute;
-    bottom: 100px;
     width: 75px;
     height: 75px;
     border-radius: 50%;
     background: url('./../assets/img/alien.png');
     background-size: cover;
-    left: 245px;
 }
 .score {
     position: absolute;
