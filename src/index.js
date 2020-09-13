@@ -5,6 +5,7 @@ const startBtn = document.querySelector('.startGame');
 const bird = document.querySelector('.bird');
 const ground = document.querySelector('.ground');
 const sky = document.querySelector('.sky');
+const score = document.querySelector('.score');
 
 const params = {
   start: false,
@@ -13,6 +14,8 @@ const params = {
   y: 400,
   jumpKoef: 6.5,
   moveSpeed: 3,
+  score: 0,
+  scoreKoef: 1,
   alienKoef: 5,
 }
 
@@ -35,6 +38,7 @@ function startGame() {
   bird.style.left = '75px';
   bird.style.top = `${params.y}px`;
 
+  score.innerHTML = `SCORE :${params.score}`;
 
   params.start = true;
   createAlien();
@@ -49,6 +53,8 @@ function playGame() {
     params.y += params.fallSpeed; // falling speed
     bird.style.top = `${params.y}px`;
 
+    params.score += 0.05;
+    score.innerHTML = `SCORE :${Math.round(params.score)}`;
     moveAlien();
     gameOver();
 
@@ -60,20 +66,21 @@ function jumpClick() {
   params.fallSpeed = 0; // stop falling
   params.y -= params.jumpKoef * params.upSpeed; // up speed
 
-  bird.style.backgroundImage = "url('./assets/img/birdUP.png')";
+  bird.style.backgroundImage = "url('./assets/img/bird.png')";
 
 
   setTimeout(() => {
-    bird.style.backgroundImage = "url('./assets/img/bird.png')";
-  }, 350);
+    bird.style.backgroundImage = "url('./assets/img/birdUP.png')";
+  }, 250);
 }
 
-function alienQuantity() {
-
+function enemysQuantity(widthElement) {
+  return (document.documentElement.clientWidth / widthElement) / params.alienKoef;
 }
 
 function createAlien() {
-  for (let i = 0; i <= 1; i++) {
+  const alienNum = enemysQuantity(75)
+  for (let i = 0; i <= alienNum; i++) {
     const alien = document.createElement('div');
     alien.classList.add('alien');
 
@@ -93,12 +100,6 @@ function moveAlien() {
       alien.x = document.documentElement.clientWidth + 200;
     }
   })
-}
-
-function createTopWall() {
-  for (let i = 0; i <= 15; i++) {
-
-  }
 }
 
 

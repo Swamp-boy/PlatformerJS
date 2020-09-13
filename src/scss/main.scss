@@ -5,7 +5,7 @@
     height: 100vh;
     position: relative;
     margin: auto;
-
+    cursor: pointer;
     overflow: hidden;
 }
 .ground {
@@ -28,8 +28,8 @@
     height: 50px;
     top: 80px;
     border-radius: 20px;
-
-    background: url('./../assets/img/bird.png');
+    left: 65px;
+    background: url('./../assets/img/birdUP.png');
     background-size: cover;
 }
 .startGame {
@@ -64,10 +64,18 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    border: 1px solid red;
     background: url('./../assets/img/alien.png');
     background-size: cover;
     left: 245px;
+}
+.score {
+    position: absolute;
+    right: 25px;
+    top: 50px;
+
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 30px;
 }
 
 // Reset css
