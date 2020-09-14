@@ -77,7 +77,18 @@
     font-weight: 700;
     font-size: 30px;
 }
-
+.wall {
+    position: absolute;
+    top: 25px;
+    width: 60px;
+    background: url('./../assets/img/wall.png');
+    background-size: 60px auto;
+}
+.bottomWall {
+    position: absolute;
+    bottom: 25px;
+    background: black;
+}
 // Reset css
 html,
 body,

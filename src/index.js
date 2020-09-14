@@ -9,15 +9,15 @@ const score = document.querySelector('.score');
 
 const params = {
   start: false,
-  fallSpeed: 0,
-  upSpeed: 10,
-  y: 400,
-  jumpKoef: 6.5,
-  moveSpeed: 3,
+  fallSpeed: 0, // speed of bird falling
+  upSpeed: 10, // speed up
+  y: 400, // start bird position
+  jumpKoef: 6.5, // for bird up
+  moveSpeed: 3, // speed of world
   score: 0,
   scoreKoef: 1,
-  alienKoef: 8,
-  alienZone: 350,
+  alienZone: 350, // 1 alien in 1 zone, zone width
+  wallsKoef: 30,
 }
 
 function getRnd(min, max) {
@@ -42,6 +42,7 @@ function startGame() {
 
   params.start = true;
   createAlien();
+  wallCreate();
 
   requestAnimationFrame(playGame);
 }
@@ -71,10 +72,6 @@ function jumpClick() {
   setTimeout(() => {
     bird.style.backgroundImage = "url('./assets/img/birdUP.png')";
   }, 250);
-}
-
-function enemysQuantity(widthElement) {
-  return (document.documentElement.clientWidth / widthElement) / params.alienKoef;
 }
 
 function createAlien() {
@@ -116,6 +113,27 @@ function moveAlien() {
       alien.style.top = `${alienTop}px`;
     }
   })
+}
+
+function wallCreate() {
+  const wallQuantity = Math.round(document.documentElement.clientWidth / (params.wallsKoef * 50)); // display width / n stalactites
+  for (let i = 0; i <= wallQuantity; i++) {
+    const wall = document.createElement('div');
+    wall.classList.add('wall');
+
+    const wallLeft = getRnd((i + 1) * 300, (i + 2) * 300);
+    const rnd = Math.random();
+    const wallHeight = (rnd >= 0.5) ? 60 : 120;
+
+
+    wall.style.left = `${wallLeft}px`;
+    wall.style.height = `${wallHeight}px`;
+    gameArea.appendChild(wall);
+  }
+}
+
+function wallMove() {
+
 }
 
 
