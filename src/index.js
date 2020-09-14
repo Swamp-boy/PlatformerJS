@@ -15,7 +15,6 @@ const params = {
   jumpKoef: 6.5, // for bird up
   moveSpeed: 3, // speed of world
   score: 0,
-  scoreKoef: 1,
   alienZone: 350, // 1 alien in 1 zone, zone width
   wallsKoef: 30,
 }
@@ -55,10 +54,11 @@ function playGame() {
 
     params.score += 0.05;
     score.innerHTML = `SCORE :${Math.round(params.score)}`;
+
     moveAlien();
     wallMove();
     gameOver();
-
+    speedUp();
     requestAnimationFrame(playGame);
   }
 }
@@ -107,7 +107,7 @@ function moveAlien() {
       && birdRound.left <= alienRound.right
       && birdRound.bottom >= alienRound.top) { console.log('lose') }
 
-    if (alien.x <= document.documentElement.clientLeft) {
+    if (alien.x <= document.documentElement.clientLeft - 100) {
       alien.x = document.documentElement.clientWidth + 200;
       const alienTop = getRnd(100, document.documentElement.clientHeight - 100); // random y
 
@@ -146,7 +146,7 @@ function wallMove() {
     wall.x -= params.moveSpeed;
     wall.style.left = `${wall.x}px`;
 
-    if (wall.x <= document.documentElement.clientLeft) {
+    if (wall.x <= document.documentElement.clientLeft - 100) {
       wall.classList.remove('top');
       wall.classList.remove('bottom');
       const wallHeight = (Math.random() >= 0.5) ? 60 : 120;
@@ -164,6 +164,29 @@ function wallMove() {
       wall.style.left = `${wall.x}px`;
     }
   })
+}
+
+function speedUp() {
+  if (params.score >= 25) params.moveSpeed = 4;
+  if (params.score >= 50) params.moveSpeed = 5;
+  if (params.score >= 75) params.moveSpeed = 6;
+  if (params.score >= 100) {
+    params.fallSpeed = 0.2;
+  }
+  if (params.score >= 125) params.moveSpeed = 8;
+  if (params.score >= 150) params.moveSpeed = 9;
+  if (params.score >= 175) params.moveSpeed = 10;
+  if (params.score >= 200) {
+    params.fallSpeed = 0.4;
+  }
+  if (params.score >= 225) params.moveSpeed = 12;
+  if (params.score >= 250) {
+    params.moveSpeed = 13;
+  }
+  if (params.score >= 275) params.moveSpeed = 14;
+  if (params.score >= 300) {
+    alert('О мой бог ты что бот как ты это сделал алё????????')
+  }
 }
 
 
