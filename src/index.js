@@ -56,6 +56,7 @@ function playGame() {
     params.score += 0.05;
     score.innerHTML = `SCORE :${Math.round(params.score)}`;
     moveAlien();
+    wallMove();
     gameOver();
 
     requestAnimationFrame(playGame);
@@ -116,16 +117,22 @@ function moveAlien() {
 }
 
 function wallCreate() {
-  const wallQuantity = Math.round(document.documentElement.clientWidth / (params.wallsKoef * 50)); // display width / n stalactites
+  const wallQuantity = getRnd(0, 5);
   for (let i = 0; i <= wallQuantity; i++) {
     const wall = document.createElement('div');
     wall.classList.add('wall');
 
-    const wallLeft = getRnd((i + 1) * 300, (i + 2) * 300);
+    const wallLeft = getRnd(300, document.documentElement.clientWidth);
     const rnd = Math.random();
-    const wallHeight = (rnd >= 0.5) ? 60 : 120;
+    if (rnd >= 0.5) {
+      wall.classList.add('top');
+    } else {
+      wall.classList.add('bottom');
+    }
+    const wallHeight = (Math.random() >= 0.5) ? 60 : 120;
 
 
+    wall.x = wallLeft;
     wall.style.left = `${wallLeft}px`;
     wall.style.height = `${wallHeight}px`;
     gameArea.appendChild(wall);
@@ -133,7 +140,30 @@ function wallCreate() {
 }
 
 function wallMove() {
+  const walls = document.querySelectorAll('.wall');
 
+  walls.forEach((wall) => {
+    wall.x -= params.moveSpeed;
+    wall.style.left = `${wall.x}px`;
+
+    if (wall.x <= document.documentElement.clientLeft) {
+      wall.classList.remove('top');
+      wall.classList.remove('bottom');
+      const wallHeight = (Math.random() >= 0.5) ? 60 : 120;
+      const rnd = Math.random();
+
+      wall.x = getRnd(document.documentElement.clientWidth, document.documentElement.clientWidth * 2);
+
+      if (rnd >= 0.5) {
+        wall.classList.add('top');
+      } else {
+        wall.classList.add('bottom');
+      }
+
+      wall.style.height = `${wallHeight}px`;
+      wall.style.left = `${wall.x}px`;
+    }
+  })
 }
 
 
