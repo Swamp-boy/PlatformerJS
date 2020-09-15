@@ -1,40 +1,24 @@
 @import 'vars/vars';
-
+body {
+    background: #be562c;
+}
 .gameArea {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 50px);
+    margin-top: 25px;
     position: relative;
-    margin: auto;
     cursor: pointer;
     overflow: hidden;
     background: url('./../assets/img/back.jpg');
 }
-.ground {
-    width: 100%;
-    height: 25px;
-    background: #be562c;
-    //background: url('./../assets/img/wall.png');
-    //background-size: 60px 60px;
-    position: absolute;
-    bottom: 0;
-}
-.sky {
-    width: 100%;
-    height: 25px;
-    background: #be562c;
-    // background: url('./../assets/img/wall.png');
-    //background-size: 60px 60px;
-    background-position-y: bottom;
-    position: absolute;
-    top: 0;
-}
+
 .bird {
     position: absolute;
     width: 70px;
     height: 50px;
-    top: 80px;
+    left: 75px;
+    top: 400px;
     border-radius: 20px;
-    left: 65px;
     background: url('./../assets/img/birdUP.png');
     background-size: cover;
 }
@@ -43,10 +27,28 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background: url('./../assets/img/alien.png') 25%;
+    background: url('./../assets/img/alien.png');
     background-size: cover;
 }
 .startGame {
+    width: 250px;
+    height: 75px;
+    border: 6px solid #8d1b71;
+    background: linear-gradient(to top, #803061, #eb31bc);
+    border-radius: 40px;
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    text-align: center;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.retry {
     width: 250px;
     height: 75px;
     border: 6px solid #8d1b71;
@@ -89,10 +91,10 @@
     background-size: 60px auto;
 }
 .top {
-    top: 25px;
+    top: 0;
 }
 .bottom {
-    bottom: 25px;
+    bottom: 0;
 }
 // Reset css
 html,
