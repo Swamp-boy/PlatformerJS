@@ -6,6 +6,7 @@ const startBtn = document.querySelector('.startGame');
 const score = document.querySelector('.score');
 const bird = document.querySelector('.bird');
 
+
 const params = {
   start: false,
   fallSpeed: 0, // speed of bird falling
@@ -67,6 +68,7 @@ function moveAlien() {
       params.start = false;
       gameArea.appendChild(startBtn);
       startBtn.classList.remove('hide');
+      console.log(alien);
     }
 
     if (alien.x <= Constants.displayLeft - 100) {
@@ -138,6 +140,7 @@ function wallMove() { // walls moving
       params.start = false;
       gameArea.appendChild(startBtn);
       startBtn.classList.remove('hide');
+      console.log(wall);
     }
   })
 }
@@ -147,26 +150,34 @@ function speedUp() { // speed ++,
   if (params.score >= 50) params.moveSpeed = 5;
   if (params.score >= 75) params.moveSpeed = 6;
   if (params.score >= 100) {
-    params.fallStartSpeed = 40;
+    params.fallStartSpeed = 0.1;
     params.moveSpeed = 7;
   }
   if (params.score >= 125) params.moveSpeed = 8;
   if (params.score >= 150) params.moveSpeed = 9;
   if (params.score >= 175) params.moveSpeed = 10;
   if (params.score >= 200) {
-    params.fallStartSpeed = 30;
-    params.moveSpeed = 11;
+    params.fallStartSpeed = 0.2;
+    params.moveSpeed = 12;
   }
-  if (params.score >= 225) params.moveSpeed = 12;
+  if (params.score >= 225) params.moveSpeed = 14;
   if (params.score >= 250) {
-    params.fallStartSpeed = 20;
-    params.moveSpeed = 13;
+    params.fallStartSpeed = 0.3;
+    params.moveSpeed = 15;
   }
-  if (params.score >= 275) params.moveSpeed = 14;
+  if (params.score >= 275) params.moveSpeed = 16;
 }
 
 function fallOnGroundSky() {
-  if (bird.y <= 25 && bird.y >= Constants.displayHeight - 25) console.log('lose')
+  if (params.y <= 15 || params.y >= Constants.displayHeight - 15) {
+    params.y = 400;
+    params.score = 0;
+    params.moveSpeed = 0;
+    params.start = false;
+    gameArea.appendChild(startBtn);
+    startBtn.classList.remove('hide');
+    console.log('out')
+  }
 }
 
 function playGame() {
@@ -182,6 +193,7 @@ function playGame() {
     wallMove();
     speedUp();
     fallOnGroundSky();
+
     requestAnimationFrame(playGame);
   }
 }
@@ -198,6 +210,7 @@ function startGame() {
   createAlien();
   wallCreate();
   gameArea.appendChild(bird);
+  gameArea.appendChild(score);
   requestAnimationFrame(playGame);
 }
 

@@ -29,6 +29,7 @@ body {
     border-radius: 50%;
     background: url('./../assets/img/alien.png');
     background-size: cover;
+    z-index: 2;
 }
 .startGame {
     width: 250px;
@@ -79,7 +80,7 @@ body {
     position: absolute;
     right: 25px;
     top: 50px;
-
+    z-index: 5;
     font-family: sans-serif;
     font-weight: 700;
     font-size: 30px;
@@ -96,6 +97,7 @@ body {
 .bottom {
     bottom: 0;
 }
+
 // Reset css
 html,
 body,
